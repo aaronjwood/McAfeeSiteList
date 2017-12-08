@@ -8,9 +8,9 @@ import argparse
 from xml.dom import minidom
 
 try:
-    from Crypto.Cipher import DES3
+    import pyDes
 except:
-    print "Crypto module required. Please install it via pip."
+    print "DES module required. Please install it via pip install pydes."
     sys.exit(1)
 
 def banner():
@@ -119,7 +119,7 @@ def decrypt(encoded):
     for i in range(0, len(decoded)):
         xored += chr(ord(decoded[i]) ^ xor_key[i % len(xor_key)])
 
-    cipher = DES3.new(key, DES3.MODE_ECB)
+    cipher = pyDes.triple_des(key, pyDes.ECB)
     decryptedString = cipher.decrypt(xored)
 
     password = ""
